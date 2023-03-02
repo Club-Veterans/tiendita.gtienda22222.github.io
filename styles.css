@@ -1,0 +1,256 @@
+
+
+.product h2 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.product p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+
+#enlace-bajar {
+  position: fixed;
+  top: 10px;
+  left: 80%;
+  transform: translateX(-50%);
+  background-color: #617f87;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+#enlace-subir {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Estilo de la página */
+
+body {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+/* Estilo de los encabezados */
+
+h1, h2, h3, h4 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+h4 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+/* Estilo de los productos */
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #282828;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+.productos {
+  
+  margin: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.producto {
+  border: 5px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: calc(31% - 10px);
+  margin-bottom: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.producto h3,
+.producto p,
+.producto button {
+  margin: 6;
+}
+
+
+
+/* Boton solo para    .boton-producto */
+.boton-producto {
+  background-color: #af4c4c;
+  border: none;
+  border-radius: 200px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.boton-producto:hover {
+  background-color: #3c388e;
+}
+
+/* Boton solo para    .boton-producto-2 */
+.boton-producto-2 {
+  background-color: #4c5eaf;
+  border: none;
+  border-radius: 200px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.boton-producto-2:hover {
+  background-color: #3c00ff;
+}
+
+/* Boton solo para    .boton-producto-3 */
+.boton-producto-3 {
+  background-color: #4caf4c;
+  border: none;
+  border-radius: 200px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.boton-producto-3:hover {
+  background-color: #3c00ff;
+}
+
+/* Estilo del carrito de compras */
+
+#carrito {
+  margin-top: 2rem;
+}
+
+#carrito li {
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Color de la cantidad y los meses en el carrito */
+#carrito li span {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Color del total de la compra */
+#total {
+  color: #4caf50;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Estilo del botón de comprar y color inicial */
+
+.btn-comprar {
+  display: block;
+  margin: 0 auto;
+  background-color: #03a9f4;
+  border: none;
+  border-radius: 200px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-top: 2rem;
+  padding: 1.5rem 2.5rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo del botón de comprar al pasar cursor */
+.btn-comprar:hover {
+  background-color: #35188c;
+}
+
+.cantidad {
+  display: inline-block;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  color: #888;
+}
+
+
+/* Mensaje pendiente */
+#mensaje {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#mensaje-texto {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+
+#mensaje.mostrar {
+  opacity: 1;
+}
+
+

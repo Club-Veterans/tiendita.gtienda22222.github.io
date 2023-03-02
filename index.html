@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Club Veterans</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="carrito.js"></script>
+    <style>
+    .btn-comprar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+    
+    .btn-comprar {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .producto {
+      flex: 1 1 300px;
+      margin: 10px;
+    }
+
+    @media (max-width: 767px) {
+  .producto {
+    flex: 1 1 calc(50% - 15px);
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <h1>Club Veterans</h1>
+
+  <h3>Servicios Disponibles:</h3>
+
+  <a href="#carrito" id="enlace-bajar">Ir al carrito</a>
+
+  <ul>
+
+    <!-- Linea #1 con 3 Productos y <br> sirve para dar un salto de linea-->
+    <div class="productos">
+      <div class="producto">
+      <img src="./imagenes/netflix.webp" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+        <div style="border-radius: 10px;">
+      <h3>1 Mes de Netflix</h3>
+      <p>Con 1 mes de Netflix tendrás a tu alcance un universo completo de entretenimiento sin anuncios y en alta resolución.</p>
+      <p>Precio: Q35.00</p>
+      <button class="boton-producto" data-nombre="Netflix" data-precio="35.00">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="producto">
+      <img src="./imagenes/disney.jpg" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+       <div style="border-radius: 10px;">
+      <h3>1 mes de Disney+</h3>
+      <p>Disney+ es fácil de usar y ofrece contenido para toda la familia, desde clásicos de Disney hasta series originales exclusivas.</p>
+      <p>Precio: Q25.00</p>
+      <button class="boton-producto" data-nombre="Disney+" data-precio="25.00">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="producto">
+        <img src="./imagenes/hbo.png" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+         <div style="border-radius: 10px;">
+        <h3>1 mes de HBO</h3>
+        <p>Con un mes de HBO Max, puedes disfrutar de programas de televisión exclusivos, películas populares y documentales premiados.</p>
+        <p>Precio: Q25.00</p>
+        <button class="boton-producto" data-nombre="HBO" data-precio="25.00">Agregar al carrito</button>
+          </div>
+        </div>
+    </div>
+
+        <!-- Linea #2 con 3 Productos -->
+    <div class="productos">
+      <div class="producto">
+      <img src="./imagenes/spotify.png" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+        <div style="border-radius: 10px;">
+      <h3>1 Mes de Spotify</h3>
+      <p>Con Spotify Premium, puedes escuchar música sin límites en múltiples dispositivos y descargarlas para escucharlas en cualquier momento.</p>
+      <p>Precio: Q35.00</p>
+      <button class="boton-producto" data-nombre="Spotify" data-precio="35.00">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="producto">
+      <img src="./imagenes/crunchyroll.png" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+       <div style="border-radius: 10px;">
+      <h3>1 mes de Crunchyroll</h3>
+      <p>Con Crunchyroll, puedes ver series populares y exclusivas de Japón en alta calidad y en múltiples dispositivos y lo mejor, SIN ANUNCIOS.</p>
+      <p>Precio: Q25.00</p>
+      <button class="boton-producto" data-nombre="Crunchyroll" data-precio="25.00">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="producto">
+        <img src="./imagenes/paramount.png" width="175" height="175" class="producto-imagen" style="border-radius: 15%;">
+         <div style="border-radius: 10px;">
+        <h3>1 mes de Paramount</h3>
+        <p>Con Paramount+, puedes ver series originales exclusivas y clásicos populares de televisión sin anuncios y descargarlos para verlos sin conexión.</p>
+        <p>Precio: Q25.00</p>
+        <button class="boton-producto" data-nombre="Paramount" data-precio="25.00">Agregar al carrito</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Acá Finalizan los productos -->
+
+  <h2>Carrito de compras</h2>
+
+  <ul id="carrito">
+  </ul>
+
+  <p style="text-align: center;">Total de la compra: <span id="total">0.00</span></p>
+  <button id="btn-comprar"class="btn-comprar">Comprar por WhatsApp</button>
+
+  <script>
+var botones = document.getElementsByClassName("boton-producto");
+var carrito = document.getElementById("carrito");
+var total = document.getElementById("total");
+var totalCompra = 0;
+var productosEnCarrito = {};
+
+function actualizarProductoEnCarrito(nombre, precio, cantidad) {
+  productosEnCarrito[nombre].cantidad = cantidad;
+  productosEnCarrito[nombre].elementoCantidad.innerText = cantidad;
+  
+  // Eliminar el producto del carrito si la cantidad es 0
+  if (cantidad === 0) {
+    productosEnCarrito[nombre].elemento.remove();
+    delete productosEnCarrito[nombre];
+  } else {
+    productosEnCarrito[nombre].elementoPrecio.innerText = `Q${(precio * cantidad).toFixed(2)}`;
+  }
+
+  // Actualizar el total de la compra
+  totalCompra = 0;
+  for (var nombre in productosEnCarrito) {
+    var producto = productosEnCarrito[nombre];
+    totalCompra += producto.precio * producto.cantidad;
+  }
+  total.innerText = `Q${totalCompra.toFixed(2)}`;
+}
+
+
+for (var i = 0; i < botones.length; i++) {
+  botones[i].addEventListener("click", function() {
+    var nombre = this.getAttribute("data-nombre");
+    var precio = parseFloat(this.getAttribute("data-precio"));
+
+    // Si el producto ya está en el carrito, mostrar un cuadro de diálogo para editar su cantidad
+    if (productosEnCarrito[nombre]) {
+      var cantidadAnterior = productosEnCarrito[nombre].cantidad;
+      var nuevaCantidad = parseInt(prompt(`Ya cuentas con un producto ${nombre} en el carrito.\nDeseas agregar o quitar más meses?:`, cantidadAnterior));
+      if (!isNaN(nuevaCantidad)) {
+        actualizarProductoEnCarrito(nombre, precio, nuevaCantidad);
+      }
+    } else { // De lo contrario, agregar un nuevo producto al carrito
+      var li = document.createElement("li");
+      var texto = document.createTextNode(nombre);
+      var spanCantidad = document.createElement("span");
+      var spanPrecio = document.createElement("span");
+
+      spanCantidad.innerText = 1;
+      spanCantidad.classList.add("cantidad");
+      spanPrecio.innerText = `Q${precio.toFixed(2)}`;
+      spanPrecio.classList.add("precio");
+
+      li.appendChild(texto);
+      li.appendChild(spanCantidad);
+      li.appendChild(document.createTextNode(" mes(es) - "));
+      li.appendChild(spanPrecio);
+      carrito.appendChild(li);
+
+      productosEnCarrito[nombre] = {
+        elemento: li,
+        elementoCantidad: spanCantidad,
+        elementoPrecio: spanPrecio,
+        precio: precio,
+        cantidad: 1
+      };
+
+      // Actualizar el total de la compra
+      totalCompra += precio;
+      total.innerText = `Q${totalCompra.toFixed(2)}`;
+    }
+  });
+}
+
+    
+  
+    var btnComprar = document.getElementById("btn-comprar");
+
+btnComprar.addEventListener("click", function() {
+  // Crear un mensaje con el listado de la compra
+  var mensaje = `Hola, me gustaría comprar los siguientes productos:\n\n`;
+  for (var nombre in productosEnCarrito) {
+    mensaje += `${nombre} *por* ${productosEnCarrito[nombre].cantidad} meses\n`;
+  }
+  mensaje += `
+Total de la compra: *Q${totalCompra.toFixed(2)}*`;
+
+  // Crear una URL con el mensaje de WhatsApp
+  var url = `https://wa.me/50237207284?text=${encodeURIComponent(mensaje)}`;
+
+  // Abrir la URL en una nueva pestaña
+  window.open(url);
+});
+
+
+
+// Obtener el enlace para bajar al carrito
+var enlaceBajar = document.getElementById("enlace-bajar");
+
+// Agregar un evento de clic al enlace para que se desplace hacia el carrito
+enlaceBajar.addEventListener("click", function(event) {
+  event.preventDefault(); // Evita que se recargue la página al hacer clic en el enlace
+  var carrito = document.getElementById("carrito");
+  carrito.scrollIntoView({ behavior: "smooth" }); // Desplazar suavemente hasta la sección del carrito
+});
+
+// Obtener el enlace para subir al inicio de la página
+var enlaceSubir = document.getElementById("enlace-subir");
+
+// Agregar un evento de clic al enlace para que se desplace hacia arriba de la página
+enlaceSubir.addEventListener("click", function(event) {
+  event.preventDefault(); // Evita que se recargue la página al hacer clic en el enlace
+  window.scrollTo({ top: 0, behavior: "smooth" }); // Desplazar suavemente hasta el inicio de la página
+});
+
+
+
+// Scroll suave al hacer clic en el enlace
+document.querySelector('#enlace-bajar').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.querySelector(this.getAttribute('href')).scrollIntoView({
+    behavior: 'smooth'
+  });
+});
+
+// Volver arriba al hacer clic en el enlace
+document.querySelector('#enlace-subir').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+
+
+
+  </script>
+
+<a href="#" id="enlace-subir">Ir arriba</a>
+
+</body>
+</html>
